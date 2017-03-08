@@ -40,20 +40,29 @@ public class CalendarGridView extends ViewGroup {
 
   public void setDayViewAdapter(DayViewAdapter adapter) {
     for (int i = 0; i < getChildCount(); i++) {
-      ((CalendarRowView) getChildAt(i)).setDayViewAdapter(adapter);
+      View v = getChildAt(i);
+      if (v instanceof CalendarRowView) {
+        ((CalendarRowView) getChildAt(i)).setDayViewAdapter(adapter);
+      }
     }
   }
 
   public void setDayBackground(int resId) {
     for (int i = 1; i < getChildCount(); i++) {
-      ((CalendarRowView) getChildAt(i)).setCellBackground(resId);
+      View v = getChildAt(i);
+      if (v instanceof CalendarRowView) {
+        ((CalendarRowView) getChildAt(i)).setCellBackground(resId);
+      }
     }
   }
 
   public void setDayTextColor(int resId) {
     for (int i = 0; i < getChildCount(); i++) {
       ColorStateList colors = getResources().getColorStateList(resId);
-      ((CalendarRowView) getChildAt(i)).setCellTextColor(colors);
+      View v = getChildAt(i);
+      if (v instanceof CalendarRowView) {
+        ((CalendarRowView) getChildAt(i)).setCellTextColor(colors);
+      }
     }
   }
 
@@ -62,7 +71,10 @@ public class CalendarGridView extends ViewGroup {
   }
 
   public void setHeaderTextColor(int color) {
-    ((CalendarRowView) getChildAt(0)).setCellTextColor(color);
+    View v = getChildAt(0);
+    if (v instanceof CalendarRowView) {
+      ((CalendarRowView) getChildAt(0)).setCellTextColor(color);
+    }
   }
 
   public void setTypeface(Typeface typeface) {
@@ -72,9 +84,10 @@ public class CalendarGridView extends ViewGroup {
   }
 
   @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
-    if (getChildCount() == 0) {
-      ((CalendarRowView) child).setIsHeaderRow(true);
-    }
+//    if (getChildCount() == 1) {
+//      ((CalendarRowView) child).setIsHeaderRow(true);
+//    }
+
     super.addView(child, index, params);
   }
 
@@ -84,21 +97,21 @@ public class CalendarGridView extends ViewGroup {
     int top = row.getTop();
     int bottom = getBottom();
     // Left side border.
-    final int left = row.getChildAt(0).getLeft() + getLeft();
-    canvas.drawLine(left + FLOAT_FUDGE, top, left + FLOAT_FUDGE, bottom, dividerPaint);
+//    final int left = row.getChildAt(0).getLeft() + getLeft();
+//    canvas.drawLine(left + FLOAT_FUDGE, top, left + FLOAT_FUDGE, bottom, dividerPaint);
 
     // Each cell's right-side border.
-    for (int c = 0; c < 7; c++) {
-      float x = left + row.getChildAt(c).getRight() - FLOAT_FUDGE;
-      canvas.drawLine(x, top, x, bottom, dividerPaint);
-    }
+//    for (int c = 0; c < 7; c++) {
+//      float x = left + row.getChildAt(c).getRight() - FLOAT_FUDGE;
+//      canvas.drawLine(x, top, x, bottom, dividerPaint);
+//    }
   }
 
   @Override protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
     final boolean retVal = super.drawChild(canvas, child, drawingTime);
     // Draw a bottom border.
-    final int bottom = child.getBottom() - 1;
-    canvas.drawLine(child.getLeft(), bottom, child.getRight() - 2, bottom, dividerPaint);
+//    final int bottom = child.getBottom() - 1;
+//    canvas.drawLine(child.getLeft(), bottom, child.getRight() - 2, bottom, dividerPaint);
     return retVal;
   }
 

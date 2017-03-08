@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import static android.view.View.MeasureSpec.AT_MOST;
@@ -97,10 +99,11 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
 
   public void setCellTextColor(int resId) {
     for (int i = 0; i < getChildCount(); i++) {
-      if (getChildAt(i) instanceof CalendarCellView) {
-        ((CalendarCellView) getChildAt(i)).getDayOfMonthTextView().setTextColor(resId);
+      View v = getChildAt(i);
+      if (v instanceof CalendarCellView) {
+        ((CalendarCellView) v).getDayOfMonthTextView().setTextColor(resId);
       } else {
-        ((TextView) getChildAt(i)).setTextColor(resId);
+        ((TextView) v).setTextColor(resId);
       }
     }
   }
@@ -110,7 +113,7 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
       if (getChildAt(i) instanceof CalendarCellView) {
         ((CalendarCellView) getChildAt(i)).getDayOfMonthTextView().setTextColor(colors);
       } else {
-        ((TextView) getChildAt(i)).setTextColor(colors);
+//        ((TextView) getChildAt(i)).setTextColor(colors);
       }
     }
   }
@@ -120,7 +123,7 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
       if (getChildAt(i) instanceof CalendarCellView) {
         ((CalendarCellView) getChildAt(i)).getDayOfMonthTextView().setTypeface(typeface);
       } else {
-        ((TextView) getChildAt(i)).setTypeface(typeface);
+//        ((TextView) getChildAt(i)).setTypeface(typeface);
       }
     }
   }

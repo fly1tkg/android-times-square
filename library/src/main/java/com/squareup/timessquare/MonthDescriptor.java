@@ -8,12 +8,14 @@ class MonthDescriptor {
   private final int year;
   private final Date date;
   private String label;
+  private String yearLabel;
 
-  public MonthDescriptor(int month, int year, Date date, String label) {
+  public MonthDescriptor(int month, int year, Date date, String label, String yearLabel) {
     this.month = month;
     this.year = year;
     this.date = date;
     this.label = label;
+    this.yearLabel = yearLabel;
   }
 
   public int getMonth() {
@@ -30,6 +32,10 @@ class MonthDescriptor {
 
   public String getLabel() {
     return label;
+  }
+
+  public String getYearLabel() {
+    return yearLabel;
   }
 
   void setLabel(String label) {

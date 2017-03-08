@@ -73,6 +73,7 @@ public class CalendarPickerView extends ListView {
   private Locale locale;
   private TimeZone timeZone;
   private DateFormat monthNameFormat;
+  private DateFormat yearNameFormat;
   private DateFormat weekdayNameFormat;
   private DateFormat fullDateFormat;
   private Calendar minCal;
@@ -197,7 +198,9 @@ public class CalendarPickerView extends ListView {
     maxCal = Calendar.getInstance(timeZone, locale);
     monthCounter = Calendar.getInstance(timeZone, locale);
     monthNameFormat =
-        new SimpleDateFormat(getContext().getString(R.string.month_name_format), locale);
+            new SimpleDateFormat(getContext().getString(R.string.month_name_format), locale);
+    yearNameFormat =
+            new SimpleDateFormat(getContext().getString(R.string.year_name_format), locale);
     monthNameFormat.setTimeZone(timeZone);
     for (MonthDescriptor month : months) {
       month.setLabel(monthNameFormat.format(month.getDate()));
@@ -238,7 +241,7 @@ public class CalendarPickerView extends ListView {
       Date date = monthCounter.getTime();
       MonthDescriptor month =
           new MonthDescriptor(monthCounter.get(MONTH), monthCounter.get(YEAR), date,
-              monthNameFormat.format(date));
+              monthNameFormat.format(date), yearNameFormat.format(date));
       cells.put(monthKey(month), getMonthCells(month, monthCounter));
       Logr.d("Adding month %s", month);
       months.add(month);
